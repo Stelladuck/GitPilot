@@ -1,0 +1,86 @@
+%---------------------------------------------------------------------------%
+% DESIGN INFORMATION                                                        %
+%---------------------------------------------------------------------------%
+% LaTeX Standalone Template for TikZ/PGFPlots (Version 1.1)
+% Author : Stelladuck (http://stelladuck.tistory.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%---------------------------------------------------------------------------%
+%
+%
+%
+%---------------------------------------------------------------------------%
+% NECESSARY PACKAGES                                                        %
+%---------------------------------------------------------------------------%
+\documentclass[a4paper,10pt]{article}
+%-----------------------------------------% ::: FUNDAMENTAL PREAMBLE :::
+\usepackage[utf8]{inputenc}					% Input type
+%\usepackage[hangul]{kotex}					% Language: KOREAN
+%\usepackage{dhucs-nanumfont}				% Font for: KOREAN	
+\usepackage[english]{babel}					% Language: ENGLISH
+\usepackage[T1]{fontenc}					% Font for: ENGLISH
+\usepackage{graphicx} 							% Required for the inclusion of images
+\usepackage[font=small]{caption}				% Required for caption with different size
+\usepackage{float}								% Required for forcing the table not to break page automatically ([H])
+
+%-----------------------------------------% ::: PRACTICAL PREAMBLE :::
+\usepackage{amsmath} 							% Required for some math elements: I
+\usepackage{amssymb}								% Required for some math elements: II
+\usepackage{mathtools}						% Required for some math elements: III
+\usepackage{xcolor}							% Required for applying different colors.
+\usepackage{siunitx}						% Required for applying different colors.
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{booktabs}						% Required for providing extension of table. ( \toprule / \midrule / \bottomrule )
+\usepackage{tabularx}
+\usepackage{lipsum}
+
+
+%---------------------------------------------------------------------------%
+% DOCUMENT CONFIGURATION                                                    %
+%---------------------------------------------------------------------------%
+%
+% Empty
+%
+\begin{document}
+%---------------------------------------------------------------------------% BODY START
+	\begin{algorithm}[ht]
+		\begin{algorithmic}\vspace{0.2em}
+			%\Procedure{Euclid}{$a,b$}\Comment{The g.c.d.\ of~$a$ and~$b$}
+			\State \textbf{S1. Objective function}
+			\State $f \gets f(s\in\mathbb{R}^{k}; \text{analytic} = \text{not necessary})$\vspace{0.7em}
+			\State \textbf{S2. Population}
+			\State $\Gamma \gets \text{bound}\subset\mathbb{R}^{k}$ \Comment{Intialize boundary limit}
+			\State $n \gets \text{population}\in\mathbb{N}$ \Comment{Initialize population size}
+			\State $S \gets \operatorname{rand}(n;\Gamma)$ \Comment{Generate population}\vspace{0.7em}
+			\State \textbf{S3. Fitness}
+			\State $\varphi \gets f(S)$ \Comment{Calculate fitness}
+			\State $\varphi^{*} \gets \max{f(S)}$ \Comment{Choose the best fitness}
+			\State $s^{*} \gets \operatorname{argmax}{f(S)}$\vspace{0.7em}
+			\State \textbf{S4. Mutation and Recombination}
+			\State $I \gets \text{iteration} \in \mathbb{N}$ \Comment{Choose iteration size}
+			\State $\rho \gets \text{mutation} \in [0.5,2]$ \Comment{Choose mutation strength}
+			\State $p \gets \text{crossover} \in [0,1]$ \Comment{Choose crossover probability}
+			\For{ $i \in I$ }
+				\For{ $j \in |S|$ }
+					\State $a,b,c \in S\setminus\{s_{j}\}$
+					\State $m \gets a + \rho (b - c)$ \Comment{\textit{Mutation}}
+					\State $s^{\prime}_{j} \gets \operatorname{mix}(s_{j},m;p)$ \Comment{Create trial with probability $p$}
+					\State $\varphi^{\prime}_{j} \gets f(s^{\prime}_{j})$ \Comment{Calculate fitness of trial}
+					\If { $\varphi_{j} < \varphi^{\prime}_{j}$ } \Comment{\textit{Recombination}}
+						\State $\varphi_{j} \gets \varphi^{\prime}_{j}$
+						\State $s_{j} \gets s^{\prime}_{j}$
+					\EndIf
+					\If { $\varphi^{*} < \varphi^{\prime}_{j}$ } \Comment{\textit{Recombination}}
+						\State $\varphi^{*} \gets \varphi^{\prime}_{j}$
+						\State $s^{*} \gets s^{\prime}_{j}$
+					\EndIf
+				\EndFor
+			\EndFor
+			\State \textbf{return} $\varphi^{*}$ and $s^{*}$ \Comment{Return the best approximation}
+			%\EndProcedure
+		\end{algorithmic}
+		\caption{Differential Evolution algorithm}\label{DE}
+	\end{algorithm}
+
+%---------------------------------------------------------------------------% BODY END
+\end{document}
