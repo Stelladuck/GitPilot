@@ -2,7 +2,7 @@ import numpy as np
 
 # The main steps of the algorithm are: initialization of the population, mutation, recombination, replacement and evaluation
 
-def DE( fobj, bounds, mut = 0.65, crossp = 0.7, popsize = 200, its = 10000 ):
+def DE( fobj, bounds, mut = 0.8, crossp = 0.7, popsize = 20, its = 1000 ):
 
 	# Boundary limtis
 	dimensions	= len(bounds)
